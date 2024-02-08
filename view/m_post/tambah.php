@@ -2,36 +2,23 @@
 include '../../config.php'; // panggil perintah koneksi database
 error_reporting(0);
 
-session_start(); // Memulai sesi
-
 /* Halaman ini tidak dapat diakses jika belum ada yang login(masuk) */
-if (!isset($_SESSION['email'])) {
+if (isset($_SESSION['email']) == 0) {
     header('Location: index.php');
-    exit;
 }
 
 $template = "subpages";
 
-// Fungsi untuk mengambil semua page dari database
-function getAllPages($conn)
-{
-    $query = "SELECT id, nama FROM m_pages";
-    $stmt = $conn->prepare($query);
-    $stmt->execute();
-    return $stmt->fetchAll(PDO::FETCH_ASSOC);
-}
 
-// Mengambil data page untuk ditampilkan dalam dropdown
-$pages = getAllPages($conn);
 ?>
 
-<!-- Tambah Data Subpages -->
+<!-- DAFTAR -->
 <h2>Tambah Data</h2>
 
 <form action="../../controller/<?php echo $template; ?>_controller.php?op=tambah" method="post">
     <table>
         <tr>
-            <td>Pages</td>
+            <td for="page">Pages</td>
             <td> <select name="page_id" id="page">
                     <?php foreach ($pages as $page) : ?>
                         <option value="<?= $page['id'] ?>"><?= htmlspecialchars($page['nama']) ?></option>
@@ -49,7 +36,7 @@ $pages = getAllPages($conn);
         </tr>
         <tr>
             <td>
-                <input type="submit" name="submit" value="Add">
+                <input type="submit" name="pages" value="Add">
             </td>
         </tr>
     </table>

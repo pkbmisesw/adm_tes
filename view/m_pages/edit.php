@@ -10,7 +10,7 @@ if (isset($_SESSION['email']) == 0) {
 
 $template = "pages";
 
-$userData = getUserById($_GET['id']);
+$pageData = getPagesById($_GET['id']);
 
 ?>
 
@@ -20,11 +20,11 @@ $userData = getUserById($_GET['id']);
         <input type="hidden" name="id" value='<?php echo $_GET["id"]; ?>' />
         <tr>
             <td>Nama</td>
-            <td><input type="text" name="nama" value='<?php echo $userData["nama"]; ?>' /></td>
+            <td><input type="text" name="nama" value='<?php echo $pageData["nama"]; ?>' /></td>
         </tr>
         <tr>
             <td>Description</td>
-            <td><textarea name="des" id="" cols="30" rows="10" value='<?php echo $userData["des"]; ?>'></textarea></td>
+            <td><textarea name="des" id="" cols="30" rows="10" value='<?php echo $pageData["des"]; ?>'></textarea></td>
         </tr>
         <tr>
             <td>
