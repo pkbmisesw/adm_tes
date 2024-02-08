@@ -24,7 +24,9 @@ $pageData = getPagesById($_GET['id']);
         </tr>
         <tr>
             <td>Description</td>
-            <td><textarea name="des" id="" cols="30" rows="10" value='<?php echo $pageData["des"]; ?>'></textarea></td>
+            <td><textarea name="des" id="" cols="30"
+                    rows="10"><?php echo htmlspecialchars($pageData["des"]); ?></textarea></td>
+        </tr>
         </tr>
         <tr>
             <td>

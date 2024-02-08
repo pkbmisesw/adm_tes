@@ -33,7 +33,9 @@ $template = "subpages";
             <td>
                 <select name="pages_id">
                     <?php foreach ($pages as $page) : ?>
-                        <option value="<?= $page['id'] ?>" <?= $page['id'] == $subpage['pages_id'] ? 'selected' : '' ?>><?= htmlspecialchars($page['nama']) ?></option>
+                    <option value="<?= htmlspecialchars($page['id']) ?>"
+                        <?= $page['id'] == $subpage['pages_id'] ? 'selected' : '' ?>>
+                        <?= htmlspecialchars($page['nama']) ?> - <?= htmlspecialchars($page['id']) ?> </option>
                     <?php endforeach; ?>
                 </select>
             </td>

@@ -25,7 +25,7 @@ $template = "subpages";
 ?>
 
 <h2>Edit Subpage</h2>
-<form action="update_subpage.php" method="post">
+<form action="update_subpages.php" method="post">
     <input type="hidden" name="id" value="<?php echo $data['id']; ?>">
     <table>
         <tr>
@@ -36,7 +36,6 @@ $template = "subpages";
             <td>Description</td>
             <td><textarea name="des"><?php echo htmlspecialchars($data['des']); ?></textarea></td>
         </tr>
-        <!-- Tambahkan elemen form lainnya sesuai kebutuhan -->
         <tr>
             <td></td>
             <td><input type="submit" value="Update"></td>
