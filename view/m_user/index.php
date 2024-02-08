@@ -6,6 +6,8 @@ error_reporting(0);
 if(isset($_SESSION['email'])== 0) {
 	header('Location: ../../index.php');
 }
+
+$template = "user"
 ?>
 hi : <?php echo $_SESSION['email']; ?> - 
 <a href="logout.php">Logout</a>
@@ -28,7 +30,10 @@ table, td, th {
 <tr>
 <th>No</th>
 <th>Nama</th>
-<th>email</th>
+<th>Level ID</th>
+<th>Email</th>
+<th>Status Aktif</th>
+<th>HP</th>
 <th>Aksi</th>
 </tr>
 
@@ -42,10 +47,13 @@ while($data=$sql->fetch()) {
 	<tr>
 		<td><?php echo $count; ?></td>
 		<td><?php echo $data['nama'];?></td>
+		<td><?php echo $data['level_id'];?></td>
 		<td><?php echo $data['email'];?></td>
+		<td><?php echo $data['status_aktif'];?></td>
+		<td><?php echo $data['hp'];?></td>
 		<td>
 		<a href="edit.php?id=<?php echo $data['id']?>">Edit</a>
-		<a onclick="return confirm('are you want deleting data')" href="../../controller/pg_proses.php?op=hapus&id=<?php echo $data['id']; ?>">❌</a>
+		<a onclick="return confirm('are you want deleting data')" href="../../controller/<?php echo $template; ?>_controller.php?op=hapus&id=<?php echo $data['id']; ?>">❌</a>
 		</td>
 	</tr>
 

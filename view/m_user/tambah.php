@@ -1,51 +1,27 @@
 <?php 
 include '../../config.php'; // panggil perintah koneksi database
-error_reporting(0); 
+error_reporting(0);
 
-
-if(isset($_POST['register'])) { // mengecek apakah form variabelnya ada isinya
-	$nama = $_POST['nama']; // isi varibel dengan mengambil data email pada form
-    $email = $_POST['email']; // isi varibel dengan mengambil data email pada form
-    $password = $_POST['password']; // isi variabel dengan mengambil data password pada form
-
-    $password = password_hash($password, PASSWORD_BCRYPT);
-
-    try {
-        $sql = "INSERT INTO m_user (nama, email, password) VALUES (:nama, :email, :password)";
-        $stmt = $conn->prepare($sql);
-        
-        //Bind our variables.
-		$stmt->bindValue(':nama', $nama);
-        $stmt->bindValue(':email', $email);
-        $stmt->bindValue(':password', $password);
-    
-        //Execute the statement and insert the new account.
-        $result = $stmt->execute();
-        
-        //If the signup process is successful.
-        if($result){
-            //What you do here is up to you!
-            echo 'Thank you for registering with our website.';
-        }
-    }
-    catch(PDOException $e) {
-        echo $e->getMessage();
-    }
+/* Halaman ini tidak dapat diakses jika belum ada yang login(masuk) */
+if(isset($_SESSION['email'])== 0) {
+    header('Location: index.php');
 }
+
+$template = "user";
 
 ?>
 
 <!-- DAFTAR -->
 <h2>Tambah Data</h2>
 
-<form action="" method="post">
+<form action="../../controller/<?php echo $template; ?>_controller.php?op=tambah" method="post">
     <table>
 		<tr>
             <td>Nama</td>
             <td><input type="text" name="nama"></td>
         </tr>
         <tr>
-            <td>email</td>
+            <td>Email</td>
             <td><input type="text" name="email"></td>
         </tr>
         <tr>
@@ -59,4 +35,3 @@ if(isset($_POST['register'])) { // mengecek apakah form variabelnya ada isinya
         </tr>
     </table>
 </form>
-<a href="./"><button>Home</button></a>
