@@ -1,9 +1,9 @@
 <?php
 
-function getPagesById($id)
+function getSubpageById($id)
 {
     global $conn;
-    $query = "SELECT * FROM `m_pages` WHERE id=$id";
+    $query = "SELECT * FROM `m_subpages` WHERE id=$id";
 
     $sql = $conn->prepare($query);
     $sql->execute();

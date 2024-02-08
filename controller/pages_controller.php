@@ -16,7 +16,7 @@ switch ($operation) {
         try {
             $sql = "UPDATE m_pages SET 
             nama = :nama, 
-            des = :des 
+            des = :des
 			WHERE id = $id";
 
             $stmt = $conn->prepare($sql);
@@ -59,6 +59,19 @@ switch ($operation) {
             $stmt->bindValue(":des", $des);
 
             $result = $stmt->execute();
+
+            // Mengambil ID yang baru saja diinsert
+            $lastId = $conn->lastInsertId();
+
+            // Mengupdate no_urut berdasarkan ID
+            $updateQuery = "UPDATE m_pages SET urut = :no_urut WHERE id = :id";
+            $updateStmt = $conn->prepare($updateQuery);
+            $updateStmt->bindParam(':urut', $lastId);
+            $updateStmt->bindParam(':id', $lastId);
+            $updateStmt->execute();
+
+            return $lastId; // Mengembalikan ID dari page yang baru ditambahkan
+
 
             if (!$result) {
                 echo "<script>alert('Gagal Menambahkan Page'); document.location.href=('../view/m_pages/')</script>";
