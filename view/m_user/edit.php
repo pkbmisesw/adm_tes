@@ -17,6 +17,7 @@ $userData = getUserById($_GET['id']);
 <h1>Edit User</h1>
 <form action="../../controller/<?php echo $template; ?>_controller.php?op=edit" method="post">
     <table>
+        <input type="hidden" name="id" value='<?php echo $_GET["id"]; ?>' />
         <tr>
             <td>Nama</td>
             <td><input type="text" name="nama" value='<?php echo $userData["nama"]; ?>' /></td>
@@ -31,11 +32,11 @@ $userData = getUserById($_GET['id']);
         </tr>
         <tr>
             <td>Status Aktif</td>
-            <td><input type="text" name="email" value='<?php echo $userData["status_aktif"]; ?>' /></td>
+            <td><input type="text" name="status_aktif" value='<?php echo $userData["status_aktif"]; ?>' /></td>
         </tr>
         <tr>
             <td>HP</td>
-            <td><input type="text" name="email" value='<?php echo $userData["hp"]; ?>' /></td>
+            <td><input type="text" name="hp" value='<?php echo $userData["hp"]; ?>' /></td>
         </tr>
         <tr>
             <td>
