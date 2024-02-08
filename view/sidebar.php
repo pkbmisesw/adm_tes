@@ -6,4 +6,4 @@
 <!-- <a href="../m_pages">Master Pages</a> -->
 <a href="../m_pages">4.Pages</a>
 <a href="../m_subpages">5.Sub Pages</a>
-<a href="../m_page">6.Post</a>
+<a href="../m_post">6.Post</a>

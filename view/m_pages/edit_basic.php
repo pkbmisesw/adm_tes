@@ -1,7 +1,7 @@
 <?php
 include '../../config.php';
-session_start();
-error_reporting(E_ALL);
+include 'components.php';
+error_reporting(0);
 
 
 if (!isset($_SESSION['email'])) {
@@ -12,7 +12,7 @@ if (!isset($_SESSION['email'])) {
 $template = "pages";
 
 $pageId = isset($_GET['id']) ? (int)$_GET['id'] : 0;
-$pageData = getPagesById($pageId);
+// $pageData = getPagesById($pageId);
 
 
 if (!$pageData) {
@@ -44,7 +44,8 @@ if (!$pageData) {
         </tr>
         <tr>
             <td>URL</td>
-            <td><input type="text" name="url" value="<?php echo htmlspecialchars($pageData["url"]); ?>" placeholder="pages?p=" /></td>
+            <td><input type="text" name="url" value="<?php echo htmlspecialchars($pageData["url"]); ?>"
+                    placeholder="pages?p=" /></td>
         </tr>
         <tr>
             <td colspan="2"><input type="submit" value="Edit" /></td>

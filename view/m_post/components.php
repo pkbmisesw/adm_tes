@@ -1,24 +1,9 @@
 <?php
 
-
-
-function getAllPages()
+function getPostById($id)
 {
     global $conn;
-    $query = "SELECT * FROM `m_pages`";
-
-    $sql = $conn->prepare($query);
-    $sql->execute();
-
-    $data = $sql->fetchAll();
-    return $data;
-}
-
-
-function getSubpageById($id)
-{
-    global $conn;
-    $query = "SELECT * FROM `m_subpages` WHERE id=$id";
+    $query = "SELECT * FROM `m_post` WHERE id=$id";
 
     $sql = $conn->prepare($query);
     $sql->execute();

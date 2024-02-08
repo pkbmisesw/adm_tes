@@ -17,12 +17,12 @@ include("../sidebar.php");
 
 
 <style>
-    table,
-    td,
-    th {
-        border: 1px solid black;
-        border-collapse: collapse;
-    }
+table,
+td,
+th {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
 </style>
 
 <br>
@@ -43,15 +43,17 @@ include("../sidebar.php");
     while ($data = $sql->fetch()) {
     ?>
 
-        <tr>
-            <td><?php echo $count; ?></td>
-            <td><?php echo $data['nama']; ?></td>
-            <td><?php echo $data['urut']; ?></td>
-            <td>
-                <a href="edit_basic.php?id=<?php echo $data['id'] ?>">Edit</a>
-                <a onclick="return confirm('are you want deleting data')" href="../../controller/<?php echo $template; ?>_controller.php?op=hapus&id=<?php echo $data['id']; ?>">❌</a>
-            </td>
-        </tr>
+    <tr>
+        <td><?php echo $count; ?></td>
+        <td><?php echo $data['nama']; ?></td>
+        <td><?php echo $data['urut']; ?></td>
+        <td><a href="edit_basic.php?id=<?php echo $data['id'] ?>">Edit</a></td>
+        <td>
+            <a href="edit_basic.php?id=<?php echo $data['id'] ?>">Edit</a>
+            <a onclick="return confirm('are you want deleting data')"
+                href="../../controller/<?php echo $template; ?>_controller.php?op=hapus&id=<?php echo $data['id']; ?>">❌</a>
+        </td>
+    </tr>
 
     <?php
         $count = $count + 1;
