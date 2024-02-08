@@ -7,31 +7,20 @@ $operation = $_GET['op'];
 
 switch ($operation) {
     case "edit":
+
+
+        // Ambil data dari POST
         $id = $_POST['id'];
+        $pages_id = $_POST['pages_id']; // Baru
         $nama = $_POST['nama'];
         $des = $_POST['des'];
 
-        print_r($_POST);
+        // Query untuk update data
+        $sql = "UPDATE m_subpages SET pages_id = :pages_id, nama = :nama, des = :des WHERE id = :id";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute([':pages_id' => $pages_id, ':nama' => $nama, ':des' => $des, ':id' => $id]);
 
-        try {
-            $sql = "UPDATE m_subpages SET 
-            nama = :nama, 
-            des = :des
-			WHERE id = $id";
 
-            $stmt = $conn->prepare($sql);
-            $stmt->bindParam(':nama', $nama);
-            $stmt->bindParam(':des', $des);
-            $stmt->execute();
-        } catch (PDOException $e) {
-            echo $e->getMessage();
-        }
-
-        if (!$stmt) {
-            echo "<script>alert('Data Gagal telah dirubah'); document.location.href=('../view/m_subpages/')</script>";
-        }
-
-        echo "<script>alert('Data telah dirubah'); document.location.href=('../view/m_subpages/')</script>";
         break;
     case "hapus":
         $id = $_GET['id'];
@@ -50,21 +39,23 @@ switch ($operation) {
     case "tambah":
         $nama = $_POST['nama'];
         $des = $_POST['des'];
+        $pages_id = $_POST['pages_id'];
 
         try {
-            $sql = "INSERT INTO m_subpages (nama, des ) VALUES (:nama, :des)";
+            $sql = "INSERT INTO m_subpages (nama, des, pages_id) VALUES (:nama, :des, :pages_id)";
             $stmt = $conn->prepare($sql);
 
             $stmt->bindValue(":nama", $nama);
             $stmt->bindValue(":des", $des);
+            $stmt->bindValue(":pages_id", $pages_id);
 
             $result = $stmt->execute();
 
             if (!$result) {
-                echo "<script>alert('Gagal Menambahkan Page'); document.location.href=('../view/m_subpages/')</script>";
+                echo "<script>alert('Gagal Menambahkan Subpage'); document.location.href=('../view/m_subpages/')</script>";
             }
 
-            echo "<script>alert('Berhasil Menambahkan Page'); document.location.href=('../view/m_subpages/')</script>";
+            echo "<script>alert('Berhasil Menambahkan Subpage'); document.location.href=('../view/m_subpages/')</script>";
         } catch (PDOException $e) {
             echo $e->getMessage();
         }

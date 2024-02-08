@@ -32,11 +32,11 @@ $pages = getAllPages($conn);
     <table>
         <tr>
             <td>Pages</td>
-            <td> <select name="page_id" id="page">
+            <td> <select name="pages_id" id="page">
                     <?php foreach ($pages as $page) : ?>
                         <option value="<?= $page['id'] ?>"><?= htmlspecialchars($page['nama']) ?></option>
                     <?php endforeach; ?>
-                </select></td>
+                </select>
         </tr>
 
         <tr>

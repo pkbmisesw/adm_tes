@@ -49,7 +49,7 @@ th {
         <!-- <td><?php echo $data['des']; ?></td> -->
         <td><a href="edit.php?id=<?php echo $data['id'] ?>">Edit</a></td>
         <td>
-            <a href="edit.php?id=<?php echo $data['id'] ?>">Edit</a>
+            <a href="edit_pages.php?id=<?php echo $data['id'] ?>">Edit</a>
             <a onclick="return confirm('are you want deleting data')"
                 href="../../controller/<?php echo $template; ?>_controller.php?op=hapus&id=<?php echo $data['id']; ?>">❌</a>
         </td>

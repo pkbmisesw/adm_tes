@@ -2,19 +2,6 @@
 
 
 
-function getAllPages()
-{
-    global $conn;
-    $query = "SELECT * FROM `m_pages`";
-
-    $sql = $conn->prepare($query);
-    $sql->execute();
-
-    $data = $sql->fetchAll();
-    return $data;
-}
-
-
 function getSubpageById($id)
 {
     global $conn;
