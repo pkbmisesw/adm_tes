@@ -4,7 +4,7 @@ error_reporting(0);
 
 /* Halaman ini tidak dapat diakses jika belum ada yang login(masuk) */
 if (isset($_SESSION['email']) == 0) {
-	header('Location: ../../index.php');
+    header('Location: ../../index.php');
 }
 
 $template = "pages"
@@ -17,12 +17,12 @@ include("../sidebar.php");
 
 
 <style>
-table,
-td,
-th {
-    border: 1px solid black;
-    border-collapse: collapse;
-}
+    table,
+    td,
+    th {
+        border: 1px solid black;
+        border-collapse: collapse;
+    }
 </style>
 
 <br>
@@ -37,26 +37,25 @@ th {
     </tr>
 
     <?php
-	$count = 1;
-	$sql = $conn->prepare("SELECT * FROM m_pages ORDER BY id DESC");
-	$sql->execute();
-	while ($data = $sql->fetch()) {
-	?>
+    $count = 1;
+    $sql = $conn->prepare("SELECT * FROM m_pages ORDER BY id DESC");
+    $sql->execute();
+    while ($data = $sql->fetch()) {
+    ?>
 
-    <tr>
-        <td><?php echo $count; ?></td>
-        <td><?php echo $data['nama']; ?></td>
-        <td><?php echo $data['urut']; ?></td>
-        <td>
-            <a href="edit.php?id=<?php echo $data['id'] ?>">Edit</a>
-            <a onclick="return confirm('are you want deleting data')"
-                href="../../controller/<?php echo $template; ?>_controller.php?op=hapus&id=<?php echo $data['id']; ?>">❌</a>
-        </td>
-    </tr>
+        <tr>
+            <td><?php echo $count; ?></td>
+            <td><?php echo $data['nama']; ?></td>
+            <td><?php echo $data['urut']; ?></td>
+            <td>
+                <a href="edit_basic.php?id=<?php echo $data['id'] ?>">Edit</a>
+                <a onclick="return confirm('are you want deleting data')" href="../../controller/<?php echo $template; ?>_controller.php?op=hapus&id=<?php echo $data['id']; ?>">❌</a>
+            </td>
+        </tr>
 
     <?php
-		$count = $count + 1;
-	}
-	?>
+        $count = $count + 1;
+    }
+    ?>
 
 </table>
