@@ -1,6 +1,7 @@
 <?php
 ini_set('display_errors', 0);
 include "../config.php";
+include "../view/m_surat/get.php";
 session_start();
 
 $op = $_GET['op'];
@@ -22,6 +23,9 @@ if($op == "edit"){
 
             $baseDir = $_SERVER['DOCUMENT_ROOT'];
             $imageDir = $baseDir."/images/";
+            $imageFileType = strtolower(pathinfo($gambar['name'],PATHINFO_EXTENSION));
+            $allowedFileType = array('jpg','JPG','jpeg','JPEG','PNG','png','xls', 'gif', 'doc', 'docx', 'xlsx', 'zip','pdf');
+            $data = getid($id);
 
             $stmt = $conn->prepare($sql);
             $stmt->bindParam(':nama', $nama);
@@ -29,6 +33,13 @@ if($op == "edit"){
             $stmt->bindParam(':url', $gambar["name"]);
             $stmt->bindParam(':stat', $status);
             $stmt->execute();
+
+            if(!(in_array($imageFileType, $allowedFileType))){
+                echo "<script>alert('Hanya boleh mengupload file gambar dan pdf.'); document.location.href=('../view/m_surat/')</script>";
+            }
+
+
+            unlink("../images/".$data['url']);
 
             $result = move_uploaded_file($gambar['tmp_name'], $imageDir.$gambar['name']);
             if(!$result){
@@ -43,6 +54,9 @@ if($op == "edit"){
 
     }else if ($op == "hapus"){
         $id = $_GET['id'];
+
+        $data = getid($id);
+        unlink("../images/".$data['url']);
 
         $sql = "DELETE FROM m_surat WHERE id = :id";
         $stmt = $conn->prepare($sql);
