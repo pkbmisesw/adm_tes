@@ -13,8 +13,6 @@ if($op == "edit"){
         $status_aktif = $_POST['status_aktif'];
         $hp = $_POST['hp'];
 
-        print_r($_POST);
-
         try {
             $sql = "UPDATE m_user SET 
             nama = :nama, 
