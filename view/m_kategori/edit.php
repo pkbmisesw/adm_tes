@@ -17,7 +17,7 @@ $ketnama = "Silahkan mengisi nama";
 
 ?>
 
-<h1>Edit User</h1>
+<h1>Edit </h1>
 <form action="../../controller/<?php echo $dba; ?>_controller.php?op=edit" method="post">
     <table>
         <input type="hidden" name="id" value='<?php echo $_GET["id"]; ?>' />

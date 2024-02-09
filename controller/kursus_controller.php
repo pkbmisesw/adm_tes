@@ -8,65 +8,70 @@ $op = $_GET['op'];
 if($op == "edit"){
         $id = $_POST['id'];
         $nama = $_POST['nama'];
-        $tgl = $_POST['tgl'];
-        $gambar = $_FILES['gambar'];
+        $des = $_POST['des'];
+        $harga = $_POST['harga'];
+        $pic = $_FILES['pic'];
         $status = $_POST['status'];
 
         try {
-            $isUploading = !empty($gambar['name']);
-
-            $sql = "UPDATE m_surat SET 
-                nama = :nama, 
-                tgl = :tgl,
-                stat = :stat
-                WHERE id = $id";
+            $isUploading = !empty($pic['name']);
 
             if($isUploading) {
-                $sql = "UPDATE m_surat SET 
+                $sql = "UPDATE m_kursus SET 
                 nama = :nama, 
-                tgl = :tgl, 
-                url = :url, 
-                stat = :stat
+                des = :des, 
+                harga = :harga, 
+                pic = :pic, 
+                status = :status
                 WHERE id = $id";
 
                 $baseDir = $_SERVER['DOCUMENT_ROOT'];
                 $imageDir = $baseDir."/images/";
-                $imageFileType = strtolower(pathinfo($gambar['name'],PATHINFO_EXTENSION));
+                $imageFileType = strtolower(pathinfo($pic['name'],PATHINFO_EXTENSION));
                 $allowedFileType = array('jpg','JPG','jpeg','JPEG','PNG','png','xls', 'gif', 'doc', 'docx', 'xlsx', 'zip','pdf');
                 $data = getid($id);
 
                 $stmt = $conn->prepare($sql);
                 $stmt->bindParam(':nama', $nama);
-                $stmt->bindParam(':tgl', $tgl);
-                $stmt->bindParam(':url', $gambar["name"]);
-                $stmt->bindParam(':stat', $status);
+                $stmt->bindParam(':des', $des);
+                $stmt->bindParam(':harga', $harga);
+                $stmt->bindParam(':pic', $pic["name"]);
+                $stmt->bindParam(':status', $status);
                 $stmt->execute();
 
                 if(!(in_array($imageFileType, $allowedFileType))){
-                    echo "<script>alert('Hanya boleh mengupload file gambar dan pdf.'); document.location.href=('../view/m_surat/')</script>";
+                    echo "<script>alert('Hanya boleh mengupload file pic dan pdf.'); document.location.href=('../view/m_kursus/')</script>";
                 }
-                unlink("../images/".$data['url']);
+                unlink("../images/".$data['pic']);
 
-                $result = move_uploaded_file($gambar['tmp_name'], $imageDir.$gambar['name']);
+                $result = move_uploaded_file($pic['tmp_name'], $imageDir.$pic['name']);
                 if(!$result){
-                    echo "<script>alert('Data Gagal dirubah'); document.location.href=('../view/m_surat/')</script>";
+                    echo "<script>alert('Data Gagal dirubah'); document.location.href=('../view/m_kursus/')</script>";
                 }
 
-                echo "<script>alert('Data telah dirubah'); document.location.href=('../view/m_surat/')</script>";
+                echo "<script>alert('Data telah dirubah'); document.location.href=('../view/m_kursus/')</script>";
                 return;
             }
 
+            $sql = "UPDATE m_kursus SET 
+                nama = :nama, 
+                des = :des, 
+                harga = :harga, 
+                status = :status
+                WHERE id = $id";
+
             $stmt = $conn->prepare($sql);
             $stmt->bindParam(':nama', $nama);
-            $stmt->bindParam(':tgl', $tgl);
-            $stmt->bindParam(':stat', $status);
+            $stmt->bindParam(':des', $des);
+            $stmt->bindParam(':harga', $harga);
+            $stmt->bindParam(':status', $status);
             $stmt->execute();
 
             if(!$stmt){
-                echo "<script>alert('Data Gagal dirubah'); document.location.href=('../view/m_surat/')</script>";
+                echo "<script>alert('Data Gagal dirubah'); document.location.href=('../view/m_kursus/')</script>";
             }
 
-            echo "<script>alert('Data telah dirubah'); document.location.href=('../view/m_surat/')</script>";
+            echo "<script>alert('Data telah dirubah'); document.location.href=('../view/m_kursus/')</script>";
         }
         catch(PDOException $e) {
             echo $e->getMessage();
@@ -76,18 +81,18 @@ if($op == "edit"){
         $id = $_GET['id'];
 
         $data = getid($id);
-        unlink("../images/".$data['url']);
+        unlink("../images/".$data['pic']);
 
-        $sql = "DELETE FROM m_surat WHERE id = :id";
+        $sql = "DELETE FROM m_kursus WHERE id = :id";
         $stmt = $conn->prepare($sql);
         $stmt->bindParam(':id', $id);
         $stmt->execute();
 
         if(!$stmt){
-            echo "<script>alert('Gagal Menghapus'); document.location.href=('../view/m_surat/')</script>";
+            echo "<script>alert('Gagal Menghapus'); document.location.href=('../view/m_kursus/')</script>";
         }
 
-        echo "<script>alert('Berhasil Menghapus'); document.location.href=('../view/m_surat/')</script>";
+        echo "<script>alert('Berhasil Menghapus'); document.location.href=('../view/m_kursus/')</script>";
 
     } else if ($op == "tambah"){
         $id_kat = $_POST['id_kat'];
