@@ -7,7 +7,11 @@ if(isset($_SESSION['email'])== 0) {
 	header('Location: ../../index.php');
 }
 
-$template = "user"
+$master = "Users";
+$dba = "user";
+$ket = "";
+$ketnama = "Silahkan mengisi nama";
+
 ?>
 hi : <?php echo $_SESSION['email']; ?> - 
 <a href="logout.php">Logout</a>
@@ -53,7 +57,7 @@ while($data=$sql->fetch()) {
 		<td><?php echo $data['hp'];?></td>
 		<td>
 		<a href="edit.php?id=<?php echo $data['id']?>">Edit</a>
-		<a onclick="return confirm('are you want deleting data')" href="../../controller/<?php echo $template; ?>_controller.php?op=hapus&id=<?php echo $data['id']; ?>">❌</a>
+		<a onclick="return confirm('are you want deleting data')" href="../../controller/<?php echo $dba; ?>_controller.php?op=hapus&id=<?php echo $data['id']; ?>">❌</a>
 		</td>
 	</tr>
 

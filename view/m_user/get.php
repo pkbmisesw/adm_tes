@@ -1,6 +1,6 @@
 <?php
 
-function getUserById($id){
+function getid($id){
     global $conn;
     $query = "SELECT * FROM `m_user` WHERE id=$id";
 

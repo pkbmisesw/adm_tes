@@ -9,7 +9,10 @@ if (!isset($_SESSION['email'])) {
     exit;
 }
 
-$template = "pages";
+$master = "Pages";
+$dba = "pages";
+$ket = "";
+$ketnama = "Silahkan mengisi nama";
 
 $pageId = isset($_GET['id']) ? (int)$_GET['id'] : 0;
 // $pageData = getPagesById($pageId);
@@ -22,17 +25,22 @@ if (!$pageData) {
 ?>
 
 <h1>Edit Pages</h1>
-<form action="../../controller/<?php echo $template; ?>_controller.php?op=edit_basic" method="post">
+<form action="../../controller/<?php echo $dba; ?>_controller.php?op=edit_basic" method="post">
     <input type="hidden" name="id" value="<?php echo htmlspecialchars($pageData["id"]); ?>" />
     <table>
+        <tr>
+            <td>Urut</td>
+            <td><input type="number" name="urut" value="<?php echo htmlspecialchars($pageData["urut"]); ?>" /></td>
+        </tr>
         <tr>
             <td>Nama</td>
             <td><input type="text" name="nama" value="<?php echo htmlspecialchars($pageData["nama"]); ?>" /></td>
         </tr>
         <tr>
-            <td>Urut</td>
-            <td><input type="number" name="urut" value="<?php echo htmlspecialchars($pageData["urut"]); ?>" /></td>
+            <td>Des</td>
+            <td><input type="text" name="nama" value="<?php echo htmlspecialchars($pageData["nama"]); ?>" /></td>
         </tr>
+       
         <tr>
             <td>Status</td>
             <td>

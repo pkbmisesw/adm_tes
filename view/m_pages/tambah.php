@@ -7,14 +7,17 @@ if (isset($_SESSION['email']) == 0) {
     header('Location: index.php');
 }
 
-$template = "pages";
+$master = "Pages";
+$dba = "pages";
+$ket = "";
+$ketnama = "Silahkan mengisi nama";
 
 ?>
 
 <!-- DAFTAR -->
 <h2>Tambah Data</h2>
 
-<form action="../../controller/<?php echo $template; ?>_controller.php?op=tambah" method="post">
+<form action="../../controller/<?php echo $dba; ?>_controller.php?op=tambah" method="post">
     <table>
         <tr>
             <td>Nama</td>

@@ -3,10 +3,8 @@ ini_set('display_errors', 0);
 include "../config.php";
 session_start();
 
-$operation = $_GET['op'];
-
-switch ($operation){
-    case "edit":
+$op = $_GET['op'];
+if($op == "edit"){
         $id = $_POST['id'];
         $nama = $_POST['nama'];
         $tgl = $_POST['tgl'];
@@ -42,9 +40,7 @@ switch ($operation){
             echo $e->getMessage();
         }
 
-        break;
-
-    case "hapus":
+    }else if ($op == "hapus"){
         $id = $_GET['id'];
 
         $sql = "DELETE FROM m_surat WHERE id = :id";
@@ -58,8 +54,7 @@ switch ($operation){
 
         echo "<script>alert('Berhasil Menghapus'); document.location.href=('../view/m_surat/')</script>";
 
-        break;
-    case "tambah":
+    } else if ($op == "tambah"){
         $nama = $_POST['nama'];
         $tgl = $_POST['tgl'];
         $status = $_POST['status'];
@@ -83,8 +78,7 @@ switch ($operation){
             echo $e->getMessage();
         }
 
-        break;
-    default:
+       
         echo "<script>document.location.href=('../view/m_surat/')</script>";
 }
 

@@ -7,7 +7,11 @@ if (isset($_SESSION['email']) == 0) {
     header('Location: ../../index.php');
 }
 
-$template = "pages"
+$master = "Pages";
+$dba = "pages";
+$ket = "";
+$ketnama = "Silahkan mengisi nama";
+
 ?>
 hi : <?php echo $_SESSION['email']; ?> -
 <a href="logout.php">Logout</a>
@@ -31,8 +35,8 @@ th {
     <caption>Master Data Pages</caption>
     <tr>
         <th>No</th>
-        <th>Nama</th>
         <th>Urut</th>
+        <th>Nama</th>
         <th>Aksi</th>
     </tr>
 
@@ -45,13 +49,12 @@ th {
 
     <tr>
         <td><?php echo $count; ?></td>
-        <td><?php echo $data['nama']; ?></td>
         <td><?php echo $data['urut']; ?></td>
-        <td><a href="edit_basic.php?id=<?php echo $data['id'] ?>">Edit</a></td>
+        <td><?php echo $data['nama']; ?></td>
         <td>
-            <a href="edit_basic.php?id=<?php echo $data['id'] ?>">Edit</a>
+            <a href="edit.php?id=<?php echo $data['id'] ?>">Edit</a>
             <a onclick="return confirm('are you want deleting data')"
-                href="../../controller/<?php echo $template; ?>_controller.php?op=hapus&id=<?php echo $data['id']; ?>">❌</a>
+                href="../../controller/<?php echo $dba; ?>_controller.php?op=hapus&id=<?php echo $data['id']; ?>">❌</a>
         </td>
     </tr>
 

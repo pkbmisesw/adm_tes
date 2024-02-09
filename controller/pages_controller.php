@@ -3,10 +3,8 @@ ini_set('display_errors', 0);
 include "../config.php";
 session_start();
 
-$operation = $_GET['op'];
-
-switch ($operation) {
-    case "edit":
+$op = $_GET['op'];
+if($op == "edit"){
         $id = $_POST['id'];
         $nama = $_POST['nama'];
         $des = $_POST['des'];
@@ -32,8 +30,7 @@ switch ($operation) {
         }
 
         echo "<script>alert('Data telah dirubah'); document.location.href=('../view/m_pages/')</script>";
-        break;
-    case "hapus":
+}else if ($op == "hapus"){
         $id = $_GET['id'];
 
         $sql = "DELETE FROM m_pages WHERE id = :id";
@@ -46,8 +43,7 @@ switch ($operation) {
         }
 
         echo "<script>alert('Berhasil Menghapus'); document.location.href=('../view/m_pages/')</script>";
-        break;
-    case "tambah":
+} else if ($op == "tambah"){
         $nama = $_POST['nama'];
         $des = $_POST['des'];
 
@@ -69,7 +65,5 @@ switch ($operation) {
             echo $e->getMessage();
         }
 
-        break;
-    default:
         echo "<script>document.location.href=('../view/m_pages/')</script>";
 }

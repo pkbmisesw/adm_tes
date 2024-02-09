@@ -8,14 +8,17 @@ if(isset($_SESSION['email'])== 0) {
     header('Location: index.php');
 }
 
-$template = "surat";
+$master = "Surat";
+$dba = "surat";
+$ket = "";
+$ketnama = "Silahkan mengisi nama";
 
 $suratData = getSuratById($_GET['id']);
 
 ?>
 
 <h1>Edit Surat</h1>
-<form action="../../controller/<?php echo $template; ?>_controller.php?op=edit" method="post" enctype="multipart/form-data">
+<form action="../../controller/<?php echo $dba; ?>_controller.php?op=edit" method="post" enctype="multipart/form-data">
     <table>
         <input type="hidden" name="id" value='<?php echo $_GET["id"]; ?>' />
         <tr>
