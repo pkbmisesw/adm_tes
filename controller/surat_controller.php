@@ -13,36 +13,56 @@ if($op == "edit"){
         $status = $_POST['status'];
 
         try {
+            $isUploading = !empty($gambar['name']);
 
             $sql = "UPDATE m_surat SET 
-            nama = :nama, 
-            tgl = :tgl, 
-            url = :url, 
-            stat = :stat
-			WHERE id = $id";
+                nama = :nama, 
+                tgl = :tgl,
+                stat = :stat
+                WHERE id = $id";
 
-            $baseDir = $_SERVER['DOCUMENT_ROOT'];
-            $imageDir = $baseDir."/images/";
-            $imageFileType = strtolower(pathinfo($gambar['name'],PATHINFO_EXTENSION));
-            $allowedFileType = array('jpg','JPG','jpeg','JPEG','PNG','png','xls', 'gif', 'doc', 'docx', 'xlsx', 'zip','pdf');
-            $data = getid($id);
+            if($isUploading) {
+                $sql = "UPDATE m_surat SET 
+                nama = :nama, 
+                tgl = :tgl, 
+                url = :url, 
+                stat = :stat
+                WHERE id = $id";
+
+                $baseDir = $_SERVER['DOCUMENT_ROOT'];
+                $imageDir = $baseDir."/images/";
+                $imageFileType = strtolower(pathinfo($gambar['name'],PATHINFO_EXTENSION));
+                $allowedFileType = array('jpg','JPG','jpeg','JPEG','PNG','png','xls', 'gif', 'doc', 'docx', 'xlsx', 'zip','pdf');
+                $data = getid($id);
+
+                $stmt = $conn->prepare($sql);
+                $stmt->bindParam(':nama', $nama);
+                $stmt->bindParam(':tgl', $tgl);
+                $stmt->bindParam(':url', $gambar["name"]);
+                $stmt->bindParam(':stat', $status);
+                $stmt->execute();
+
+                if(!(in_array($imageFileType, $allowedFileType))){
+                    echo "<script>alert('Hanya boleh mengupload file gambar dan pdf.'); document.location.href=('../view/m_surat/')</script>";
+                }
+                unlink("../images/".$data['url']);
+
+                $result = move_uploaded_file($gambar['tmp_name'], $imageDir.$gambar['name']);
+                if(!$result){
+                    echo "<script>alert('Data Gagal dirubah'); document.location.href=('../view/m_surat/')</script>";
+                }
+
+                echo "<script>alert('Data telah dirubah'); document.location.href=('../view/m_surat/')</script>";
+                return;
+            }
 
             $stmt = $conn->prepare($sql);
             $stmt->bindParam(':nama', $nama);
             $stmt->bindParam(':tgl', $tgl);
-            $stmt->bindParam(':url', $gambar["name"]);
             $stmt->bindParam(':stat', $status);
             $stmt->execute();
 
-            if(!(in_array($imageFileType, $allowedFileType))){
-                echo "<script>alert('Hanya boleh mengupload file gambar dan pdf.'); document.location.href=('../view/m_surat/')</script>";
-            }
-
-
-            unlink("../images/".$data['url']);
-
-            $result = move_uploaded_file($gambar['tmp_name'], $imageDir.$gambar['name']);
-            if(!$result){
+            if(!$stmt){
                 echo "<script>alert('Data Gagal dirubah'); document.location.href=('../view/m_surat/')</script>";
             }
 
