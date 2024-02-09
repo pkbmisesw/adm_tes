@@ -1,6 +1,6 @@
 <?php
 include '../../config.php';
-include 'components.php';
+include 'get.php';
 error_reporting(0);
 
 /* Halaman ini tidak dapat diakses jika belum ada yang login(masuk) */
@@ -13,7 +13,7 @@ $dba = "surat";
 $ket = "";
 $ketnama = "Silahkan mengisi nama";
 
-$suratData = getSuratById($_GET['id']);
+$data = getsuratbyid($_GET['id']);
 
 ?>
 
@@ -23,11 +23,11 @@ $suratData = getSuratById($_GET['id']);
         <input type="hidden" name="id" value='<?php echo $_GET["id"]; ?>' />
         <tr>
             <td>Nama</td>
-            <td><input type="text" name="nama" value='<?php echo $suratData["nama"]; ?>' /></td>
+            <td><input type="text" name="nama" value='<?php echo $data["nama"]; ?>' /></td>
         </tr>
         <tr>
             <td>Tanggal</td>
-            <td><input type="text" name="tgl" value='<?php echo $suratData["tgl"]; ?>' /></td>
+            <td><input type="text" name="tgl" value='<?php echo $data["tgl"]; ?>' /></td>
         </tr>
         <tr>
             <td>Gambar</td>
@@ -35,7 +35,7 @@ $suratData = getSuratById($_GET['id']);
         </tr>
         <tr>
             <td>Status</td>
-            <td><input type="text" name="status" value='<?php echo $suratData["stat"]; ?>' /></td>
+            <td><input type="text" name="status" value='<?php echo $data["stat"]; ?>' /></td>
         </tr>
         <tr>
             <td>

@@ -1,6 +1,6 @@
 <?php
 
-function getAllSurat(){
+function getallsurat(){
     global $conn;
     $query = "SELECT * FROM `m_surat`";
 
@@ -11,7 +11,7 @@ function getAllSurat(){
     return $data;
 }
 
-function getSuratById($id)
+function getsuratbyid($id)
 {
     global $conn;
     $query = "SELECT * FROM `m_surat` WHERE id=$id";

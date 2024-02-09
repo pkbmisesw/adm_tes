@@ -7,8 +7,8 @@ $pass = ""; //password dari host anda
 $db   = "buatweb"; // nama database yang anda miliki
 
 try {
-	$conn = new PDO("mysql:host={$host};dbname={$db}", $user, $pass);
-	$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $conn = new PDO("mysql:host={$host};dbname={$db}", $user, $pass);
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (PDOException $e) {
-	echo $e->getMessage();
+    echo $e->getMessage();
 }
