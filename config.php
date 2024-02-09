@@ -4,7 +4,7 @@ session_start(); // Digunakan untuk memulai session
 $host = "localhost"; // nama host anda
 $user = "root"; // usernames dari host anda
 $pass = ""; //password dari host anda
-$db   = "dbweb"; // nama database yang anda miliki
+$db   = "buatweb"; // nama database yang anda miliki
 
 try {
 	$conn = new PDO("mysql:host={$host};dbname={$db}", $user, $pass);
