@@ -12,6 +12,7 @@ if($op == "edit"){
         $status = $_POST['status'];
 
         try {
+
             $sql = "UPDATE m_surat SET 
             nama = :nama, 
             tgl = :tgl, 

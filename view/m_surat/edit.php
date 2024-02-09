@@ -13,7 +13,7 @@ $dba = "surat";
 $ket = "";
 $ketnama = "Silahkan mengisi nama";
 
-$data = getsuratbyid($_GET['id']);
+$data = getid($_GET['id']);
 
 ?>
 
