@@ -1,9 +1,9 @@
 <?php
 
-function getPagesById($id)
+function getid($id)
 {
     global $conn;
-    $query = "SELECT * FROM `m_pages` WHERE id=$id";
+    $query = "SELECT * FROM `m_materi_list` WHERE id=$id";
 
     $sql = $conn->prepare($query);
     $sql->execute();
@@ -11,3 +11,5 @@ function getPagesById($id)
     $data = $sql->fetch();
     return $data;
 }
+
+?>

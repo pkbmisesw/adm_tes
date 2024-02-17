@@ -14,8 +14,8 @@ $ket = "";
 $ketnama = "Silahkan mengisi nama";
 
 ?>
-hi : <?php echo $_SESSION['email']; ?> - 
-<a href="logout.php">Logout</a>
+hi : <?php echo $_SESSION['email']; ?> -
+<a href="../../logout">Logout</a>
 <?php
 include ("../sidebar.php");
 ?>
@@ -37,6 +37,11 @@ table, td, th {
 <th>Kategori</th>
 <th>Nama</th>
 <th>Harga</th>
+<th>Durasi</th>
+<th>Skill Level</th>
+<th>Sertifikat</th>
+<th>Link Youtube</th>
+<th>Gambar Youtube</th>
 <th>Gambar</th>
 <th>Aksi</th>
 </tr>
@@ -56,7 +61,12 @@ while($data=$sql->fetch()) {
 		<td><?php echo $count; ?></td>
 		<td><?php echo $dataKategori['nama']; ?></td>
 		<td><?php echo $data['nama'];?></td>
-		<td><?php echo $data['harga'];?></td>
+		<td><?php echo "Rp. " . number_format($data['harga'], 0, null, '.').",-" ?></td>
+        <td><?php echo $data['durasi'];?></td>
+        <td><?php echo $data['skill_level'];?></td>
+        <td><?php echo $data['sertifikat'];?></td>
+        <td><a href="<?php echo $data['yt'];?>">Lihat</a></td>
+        <td><a href="../../images/<?php echo $data['pic_yt'];?>">Lihat</a></td>
         <td><a href='../../images/<?php echo $data['pic'];?>'>Lihat</a></td>
 		<td>
 		<a href="edit.php?id=<?php echo $data['id'];?>">Edit</a>

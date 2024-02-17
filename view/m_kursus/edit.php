@@ -22,6 +22,20 @@ $data = getid($_GET['id']);
     <table>
         <input type="hidden" name="id" value='<?php echo $_GET["id"]; ?>' />
         <tr>
+            <td>Kategori</td>
+            <td>
+                <select name="id_kat">
+                    <?php
+                    $sql_kategori = $conn->prepare("SELECT * FROM m_kategori ORDER BY id DESC");
+                    $sql_kategori->execute();
+                    while($data_kategori = $sql_kategori->fetch()){
+                    ?>
+                    <option value="<?php echo $data_kategori['id']; ?>" <?php echo ($data['id_kat'] == $data_kategori['id']) ? 'selected' : ''; ?>><?php echo $data_kategori['nama'] ?></option>
+                    <?php } ?>
+                </select>
+            </td>
+        </tr>
+        <tr>
             <td>Nama</td>
             <td><input type="text" name="nama" value='<?php echo $data["nama"]; ?>' /></td>
         </tr>
@@ -40,6 +54,26 @@ $data = getid($_GET['id']);
         <tr>
             <td>Status</td>
             <td><input type="text" name="status" value="<?php echo $data["status"]; ?>" /></td>
+        </tr>
+        <tr>
+            <td>Durasi</td>
+            <td><input type="text" name="durasi" value="<?php echo $data["durasi"]; ?>" ></td>
+        </tr>
+        <tr>
+            <td>Skill Level</td>
+            <td><input type="text" name="skill_level" value="<?php echo $data["skill_level"]; ?>" ></td>
+        </tr>
+        <tr>
+            <td>Sertifikat</td>
+            <td><input type="text" name="sertifikat" value="<?php echo $data["sertifikat"]; ?>" ></td>
+        </tr>
+        <tr>
+            <td>Pic YT</td>
+            <td><input type="file" name="pic_yt" id="pic_yt" /></td>
+        </tr>
+        <tr>
+            <td>YT</td>
+            <td><input type="text" name="yt" value="<?php echo $data["yt"]; ?>" ></td>
         </tr>
         <tr>
             <td>

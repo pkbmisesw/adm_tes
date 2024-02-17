@@ -1,9 +1,9 @@
 <?php
 
-function getPostById($id)
+function getid($id)
 {
     global $conn;
-    $query = "SELECT * FROM `m_post` WHERE id=$id";
+    $query = "SELECT * FROM `m_materi` WHERE id=$id";
 
     $sql = $conn->prepare($query);
     $sql->execute();
@@ -11,3 +11,5 @@ function getPostById($id)
     $data = $sql->fetch();
     return $data;
 }
+
+?>
